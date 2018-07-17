@@ -76,7 +76,8 @@ class MockLocationError implements Location {
   MockLocationError(this.errorCode);
 
   @override
-  Future<Map<String, double>> get getLocation => Future.error(PlatformException(code: errorCode));
+  Future<Map<String, double>> get getLocation =>
+      Future.error(PlatformException(code: errorCode));
 
   @override
   Stream<Map<String, double>> get onLocationChanged => Stream.empty();
@@ -103,7 +104,8 @@ void main() {
 
     await tester.pump();
 
-    const defaultPosition = 'Position(1.2345, 5.4321, 123.0, 5678.9, 12.0, 0.0)';
+    const defaultPosition =
+        'Position(1.2345, 5.4321, 123.0, 5678.9, 12.0, 0.0)';
     expect(find.text('current location: $defaultPosition'), findsOneWidget);
     expect(find.text('last location: $defaultPosition'), findsOneWidget);
     expect(find.text('error: null'), findsOneWidget);
@@ -114,15 +116,27 @@ void main() {
     locationStream.add(locations[1]);
     await tester.pumpAndSettle(); // Wait for render after stream
 
-    expect(find.text('current location: Position(5.4321, 1.2345, 0.0, 432.1, 5.0, 0.0)'), findsOneWidget);
-    expect(find.text('last location: Position(1.2345, 5.4321, 123.0, 5678.9, 12.0, 0.0)'), findsOneWidget);
+    expect(
+        find.text(
+            'current location: Position(5.4321, 1.2345, 0.0, 432.1, 5.0, 0.0)'),
+        findsOneWidget);
+    expect(
+        find.text(
+            'last location: Position(1.2345, 5.4321, 123.0, 5678.9, 12.0, 0.0)'),
+        findsOneWidget);
     expect(find.text('error: null'), findsOneWidget);
 
     locationStream.add(locations[2]);
     await tester.pumpAndSettle();
 
-    expect(find.text('current location: Position(40.5, -111.9, 0.0, 432.1, 5.0, 0.5)'), findsOneWidget);
-    expect(find.text('last location: Position(5.4321, 1.2345, 0.0, 432.1, 5.0, 0.0)'), findsOneWidget);
+    expect(
+        find.text(
+            'current location: Position(40.5, -111.9, 0.0, 432.1, 5.0, 0.5)'),
+        findsOneWidget);
+    expect(
+        find.text(
+            'last location: Position(5.4321, 1.2345, 0.0, 432.1, 5.0, 0.0)'),
+        findsOneWidget);
     expect(find.text('error: null'), findsOneWidget);
   });
 
@@ -137,7 +151,8 @@ void main() {
     expect(find.text('error: Location Permission Denied'), findsOneWidget);
   });
 
-  testWidgets('check permission denied never asked', (WidgetTester tester) async {
+  testWidgets('check permission denied never asked',
+      (WidgetTester tester) async {
     mockLocation(() => MockLocationError('PERMISSION_DENIED_NEVER_ASK'));
 
     await tester.pumpWidget(LocationContext.around(TestWidget()));
@@ -145,6 +160,9 @@ void main() {
 
     expect(find.text('current location: null'), findsOneWidget);
     expect(find.text('last location: null'), findsOneWidget);
-    expect(find.text('error: Location Permission Denied. Please open App Settings and enabled Location Permissions'), findsOneWidget);
+    expect(
+        find.text(
+            'error: Location Permission Denied. Please open App Settings and enabled Location Permissions'),
+        findsOneWidget);
   });
 }

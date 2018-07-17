@@ -15,7 +15,6 @@ LocationFactory _createLocation = () => Location();
 
 Location _getLocation() => _createLocation();
 
-
 /// The actual inherited widget for the context
 class LocationContext extends InheritedWidget {
   final Position currentLocation;
