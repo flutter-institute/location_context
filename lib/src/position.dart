@@ -20,7 +20,6 @@ class Position {
     this.speedAccuracy,
   });
 
-  @visibleForTesting
   Position._fromMap(Map<String, double> data)
       : this(
           latitude: data['latitude'],

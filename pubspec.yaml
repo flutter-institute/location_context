@@ -16,7 +16,6 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  async: ^2.0.7
 
 flutter:
   uses-material-design: true
