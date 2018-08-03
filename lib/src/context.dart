@@ -27,8 +27,7 @@ class LocationContext extends InheritedWidget {
     this.error,
     Key key,
     Widget child,
-  })
-      : super(key: key, child: child);
+  }) : super(key: key, child: child);
 
   static Widget around(Widget child, {Key key}) {
     return _LocationContextWrapper(child: child, key: key);
