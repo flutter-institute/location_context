@@ -11,6 +11,8 @@ class Position {
   final double speed;
   final double speedAccuracy; // Always 0 on ios
 
+  final int _hashCode;
+
   Position({
     this.latitude,
     this.longitude,
@@ -18,7 +20,8 @@ class Position {
     this.altitude,
     this.speed,
     this.speedAccuracy,
-  });
+  }) : _hashCode = hashObjects(
+            [latitude, longitude, accuracy, altitude, speed, speedAccuracy]);
 
   Position._fromMap(Map<String, double> data)
       : this(
@@ -33,18 +36,11 @@ class Position {
   @override
   bool operator ==(dynamic other) {
     if (other is! Position) return false;
-    final Position typedOther = other;
-    return latitude == typedOther.latitude &&
-        longitude == typedOther.longitude &&
-        accuracy == typedOther.accuracy &&
-        altitude == typedOther.altitude &&
-        speed == typedOther.speed &&
-        speedAccuracy == typedOther.speedAccuracy;
+    return hashCode == other.hashCode;
   }
 
   @override
-  int get hashCode => hashObjects(
-      [latitude, longitude, accuracy, altitude, speed, speedAccuracy]);
+  int get hashCode => _hashCode;
 
   @override
   String toString() {
