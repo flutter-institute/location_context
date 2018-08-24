@@ -1,6 +1,6 @@
 name: location_context
 description: Helper widgets to share location data using InheritedWidgets
-version: 1.0.3
+version: 1.0.3+1
 author: Brian Armstrong <brian@flutter.institute>
 homepage: https://flutter.institute/
 

@@ -1,4 +1,8 @@
-## [1.0.2+1] - 2018-08-24
+## [1.0.3+1] - 2018-08-24
+
+* Fixing version numbers in the changelog, because I forgot to save it.
+
+## [1.0.3] - 2018-08-24
 
 * Streamlining the Location dependency injection in context.dart
 * Fixing the compiler errors in context.dart related to dart 2
