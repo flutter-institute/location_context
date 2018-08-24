@@ -1,0 +1,19 @@
+name: location_context_example
+description: Example for using the location_context package
+
+version: 1.0.0+1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^0.1.2
+  location_context:
+    path: ../
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+
+flutter:
+  uses-material-design: true

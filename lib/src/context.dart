@@ -13,8 +13,6 @@ void mockLocation(LocationFactory mock) {
 
 LocationFactory _createLocation = () => Location();
 
-Location _getLocation() => _createLocation();
-
 /// The actual inherited widget for the context
 class LocationContext extends InheritedWidget {
   final Position currentLocation;
@@ -56,7 +54,7 @@ class _LocationContextWrapper extends StatefulWidget {
 }
 
 class _LocationContextWrapperState extends State<_LocationContextWrapper> {
-  final Location _location = _getLocation();
+  final Location _location = _createLocation();
 
   String _error;
 
@@ -70,7 +68,7 @@ class _LocationContextWrapperState extends State<_LocationContextWrapper> {
     super.initState();
 
     _locationChangedSubscription =
-        _location.onLocationChanged.listen((Map<String, double> result) {
+        _location.onLocationChanged().listen((Map<String, double> result) {
       final Position nextLocation = Position._fromMap(result);
       setState(() {
         _error = null;
@@ -84,14 +82,14 @@ class _LocationContextWrapperState extends State<_LocationContextWrapper> {
 
   @override
   void dispose() {
-    _locationChangedSubscription.cancel();
+    _locationChangedSubscription?.cancel();
 
     super.dispose();
   }
 
   void initLocation() async {
     try {
-      final Map<String, double> result = await _location.getLocation;
+      final Map<String, double> result = await _location.getLocation();
 
       setState(() {
         _error = null;

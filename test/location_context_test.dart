@@ -63,10 +63,13 @@ class MockLocation implements Location {
   MockLocation(this._default, this._stream);
 
   @override
-  Future<Map<String, double>> get getLocation async => _default;
+  Future<Map<String, double>> getLocation() async => _default;
 
   @override
-  Stream<Map<String, double>> get onLocationChanged => _stream;
+  Future<bool> hasPermission() async => true;
+
+  @override
+  Stream<Map<String, double>> onLocationChanged() => _stream;
 }
 
 class MockLocationError implements Location {
@@ -75,11 +78,14 @@ class MockLocationError implements Location {
   MockLocationError(this.errorCode);
 
   @override
-  Future<Map<String, double>> get getLocation =>
+  Future<Map<String, double>> getLocation() =>
       Future.error(PlatformException(code: errorCode));
 
   @override
-  Stream<Map<String, double>> get onLocationChanged => Stream.empty();
+  Future<bool> hasPermission() async => false;
+
+  @override
+  Stream<Map<String, double>> onLocationChanged() => Stream.empty();
 }
 
 void main() {

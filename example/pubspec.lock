@@ -64,6 +64,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.14.5"
+  cupertino_icons:
+    dependency: "direct main"
+    description:
+      name: cupertino_icons
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.2"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -145,12 +152,19 @@ packages:
     source: hosted
     version: "0.3.4"
   location:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: location
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.4.1"
+  location_context:
+    dependency: "direct main"
+    description:
+      path: ".."
+      relative: true
+    source: path
+    version: "1.0.3"
   logging:
     dependency: transitive
     description:
@@ -236,7 +250,7 @@ packages:
     source: hosted
     version: "1.4.2"
   quiver:
-    dependency: "direct main"
+    dependency: transitive
     description:
       name: quiver
       url: "https://pub.dartlang.org"
