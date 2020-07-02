@@ -1,3 +1,8 @@
+## [1.1.0]
+
+* Updating to be compatible with latest location dependency
+* Adding support for all the new location methods
+
 ## [1.0.3+1] - 2018-08-24
 
 * Fixing version numbers in the changelog, because I forgot to save it.

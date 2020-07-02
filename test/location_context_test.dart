@@ -29,7 +29,7 @@ class TestWidget extends StatelessWidget {
   }
 }
 
-final List<Map<String, double>> locations = [
+final List<LocationData> locations = [
   {
     'latitude': 1.2345,
     'longitude': 5.4321,
@@ -37,6 +37,8 @@ final List<Map<String, double>> locations = [
     'altitude': 5678.9,
     'speed': 12.0,
     'speed_accuracy': 0.0,
+    'heading': 0.0,
+    'time': 0.0,
   },
   {
     'latitude': 5.4321,
@@ -45,6 +47,8 @@ final List<Map<String, double>> locations = [
     'altitude': 432.1,
     'speed': 5.0,
     'speed_accuracy': 0.0,
+    'heading': 0.0,
+    'time': 0.0,
   },
   {
     'latitude': 40.5,
@@ -53,46 +57,83 @@ final List<Map<String, double>> locations = [
     'altitude': 432.1,
     'speed': 5.0,
     'speed_accuracy': 0.5,
+    'heading': 0.0,
+    'time': 0.0,
   },
-];
+].map((m) => LocationData.fromMap(m)).toList();
 
 class MockLocation implements Location {
-  final Map<String, double> _default;
-  final Stream<Map<String, double>> _stream;
+  final LocationData _default;
+  final Stream<LocationData> _stream;
+  final PermissionStatus _permissionStatus;
 
-  MockLocation(this._default, this._stream);
-
-  @override
-  Future<Map<String, double>> getLocation() async => _default;
-
-  @override
-  Future<bool> hasPermission() async => true;
+  MockLocation(this._default, this._stream,
+      [this._permissionStatus = PermissionStatus.granted]);
 
   @override
-  Stream<Map<String, double>> onLocationChanged() => _stream;
+  Future<bool> changeSettings({
+    LocationAccuracy accuracy = LocationAccuracy.high,
+    int interval = 1000,
+    double distanceFilter = 0,
+  }) async =>
+      true;
+
+  @override
+  Future<LocationData> getLocation() async => _default;
+
+  @override
+  Future<PermissionStatus> hasPermission() async => _permissionStatus;
+
+  @override
+  Stream<LocationData> get onLocationChanged => _stream;
+
+  @override
+  Future<PermissionStatus> requestPermission() async => _permissionStatus;
+
+  @override
+  Future<bool> requestService() async => true;
+
+  @override
+  Future<bool> serviceEnabled() async => true;
 }
 
 class MockLocationError implements Location {
   final String errorCode;
 
   MockLocationError(this.errorCode);
+  @override
+  Future<bool> changeSettings({
+    LocationAccuracy accuracy = LocationAccuracy.high,
+    int interval = 1000,
+    double distanceFilter = 0,
+  }) async =>
+      true;
 
   @override
-  Future<Map<String, double>> getLocation() =>
-      Future.error(PlatformException(code: errorCode));
+  Future<LocationData> getLocation() async =>
+      throw PlatformException(code: errorCode);
 
   @override
-  Future<bool> hasPermission() async => false;
+  Future<PermissionStatus> hasPermission() async => PermissionStatus.denied;
 
   @override
-  Stream<Map<String, double>> onLocationChanged() => Stream.empty();
+  Stream<LocationData> get onLocationChanged => Stream.empty();
+
+  @override
+  Future<PermissionStatus> requestPermission() async => PermissionStatus.denied;
+
+  @override
+  Future<bool> requestService() async => false;
+
+  @override
+  Future<bool> serviceEnabled() async => false;
 }
 
 void main() {
-  StreamController<Map<String, double>> locationStream;
+  StreamController<LocationData> locationStream;
 
   setUp(() {
-    locationStream = StreamController<Map<String, double>>();
+    locationStream = StreamController<LocationData>();
     mockLocation(() => MockLocation(locations[0], locationStream.stream));
   });
 
@@ -110,7 +151,7 @@ void main() {
     await tester.pump();
 
     const defaultPosition =
-        'Position(1.2345, 5.4321, 123.0, 5678.9, 12.0, 0.0)';
+        'Position(1.2345, 5.4321, 123.0, 5678.9, 12.0, 0.0, 0.0, 0.0)';
     expect(find.text('current location: $defaultPosition'), findsOneWidget);
     expect(find.text('last location: $defaultPosition'), findsOneWidget);
     expect(find.text('error: null'), findsOneWidget);
@@ -123,11 +164,11 @@ void main() {
 
     expect(
         find.text(
-            'current location: Position(5.4321, 1.2345, 0.0, 432.1, 5.0, 0.0)'),
+            'current location: Position(5.4321, 1.2345, 0.0, 432.1, 5.0, 0.0, 0.0, 0.0)'),
         findsOneWidget);
     expect(
         find.text(
-            'last location: Position(1.2345, 5.4321, 123.0, 5678.9, 12.0, 0.0)'),
+            'last location: Position(1.2345, 5.4321, 123.0, 5678.9, 12.0, 0.0, 0.0, 0.0)'),
         findsOneWidget);
     expect(find.text('error: null'), findsOneWidget);
 
@@ -136,11 +177,11 @@ void main() {
 
     expect(
         find.text(
-            'current location: Position(40.5, -111.9, 0.0, 432.1, 5.0, 0.5)'),
+            'current location: Position(40.5, -111.9, 0.0, 432.1, 5.0, 0.5, 0.0, 0.0)'),
         findsOneWidget);
     expect(
         find.text(
-            'last location: Position(5.4321, 1.2345, 0.0, 432.1, 5.0, 0.0)'),
+            'last location: Position(5.4321, 1.2345, 0.0, 432.1, 5.0, 0.0, 0.0, 0.0)'),
         findsOneWidget);
     expect(find.text('error: null'), findsOneWidget);
   });

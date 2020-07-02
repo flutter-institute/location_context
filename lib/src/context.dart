@@ -32,7 +32,7 @@ class LocationContext extends InheritedWidget {
   }
 
   static LocationContext of(BuildContext context) {
-    return context.inheritFromWidgetOfExactType(LocationContext);
+    return context.dependOnInheritedWidgetOfExactType<LocationContext>();
   }
 
   @override
@@ -61,15 +61,15 @@ class _LocationContextWrapperState extends State<_LocationContextWrapper> {
   Position _currentLocation;
   Position _lastLocation;
 
-  StreamSubscription<Map<String, double>> _locationChangedSubscription;
+  StreamSubscription<LocationData> _locationChangedSubscription;
 
   @override
   void initState() {
     super.initState();
 
     _locationChangedSubscription =
-        _location.onLocationChanged().listen((Map<String, double> result) {
-      final Position nextLocation = Position._fromMap(result);
+        _location.onLocationChanged.listen((LocationData result) {
+      final Position nextLocation = Position._fromLocationData(result);
       setState(() {
         _error = null;
         _lastLocation = _currentLocation;
@@ -89,11 +89,11 @@ class _LocationContextWrapperState extends State<_LocationContextWrapper> {
 
   void initLocation() async {
     try {
-      final Map<String, double> result = await _location.getLocation();
+      final LocationData result = await _location.getLocation();
 
       setState(() {
         _error = null;
-        _lastLocation = Position._fromMap(result);
+        _lastLocation = Position._fromLocationData(result);
         _currentLocation = _lastLocation;
       });
     } on PlatformException catch (e) {

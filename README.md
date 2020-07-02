@@ -8,7 +8,7 @@ This plugin is also available on [pub](https://pub.dartlang.org/packages/locatio
 
 ## Getting Started
 
-For help getting started with Flutter, view our online [documentation](https://flutter.io/).
+For help getting started with Flutter, view our online [documentation](https://flutter.dev/).
 You can also visit us at [Flutter Institute](https://flutter.institute)
 
-For help on editing package code, view the [documentation](https://flutter.io/developing-packages/).
+For help on editing package code, view the [documentation](https://flutter.dev/docs/development/packages-and-plugins/developing-packages).
