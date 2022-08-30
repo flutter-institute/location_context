@@ -5,6 +5,8 @@
 .pub/
 .idea/
 
+.env.dart
+
 build/
 ios/.generated/
 ios/Flutter/Generated.xcconfig

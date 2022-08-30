@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:location_context/location_context.dart';
 
-const MAPS_API_KEY = 'AIzaSyB0vykgvACInKwdBKsrgvJwOVIvC2AHEdU';
+// TODO create your own google maps API key and set it up in .env.dart
+import '.env.dart' show MAPS_API_KEY;
 
 void main() => runApp(LocationContextExampleApp());
 

@@ -21,7 +21,7 @@ dev_dependencies:
   location_platform_interface: ^2.3.0
 
 false_secrets:
-  - example/lib/main.dart
+  - example/lib/.env.dart.example
 
 flutter:
   uses-material-design: true
