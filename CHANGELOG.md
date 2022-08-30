@@ -1,3 +1,8 @@
+## [2.0.0]
+
+* Null safety compatibility - what took so long?
+* Updating to be compatible with latest location dependency
+
 ## [1.1.0]
 
 * Updating to be compatible with latest location dependency
