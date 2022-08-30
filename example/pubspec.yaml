@@ -19,6 +19,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+false_secrets:
+  - lib/main.dart
 
 flutter:
   uses-material-design: true
