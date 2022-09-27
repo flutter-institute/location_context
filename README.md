@@ -1,6 +1,6 @@
 # location_context
 
-[![Build Status](https://travis-ci.org/flutter-institute/location_context.svg?branch=master)](https://travis-ci.org/flutter-institute/location_context)
+[![Codemagic build status](https://api.codemagic.io/apps/63333e3c0c4aeb6f4075ae5c/63333e3c0c4aeb6f4075ae5b/status_badge.svg)](https://codemagic.io/apps/63333e3c0c4aeb6f4075ae5c/63333e3c0c4aeb6f4075ae5b/latest_build)
 
 Helper functions to share location data using InheritedWidgets
 

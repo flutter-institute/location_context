@@ -1,3 +1,9 @@
+## [2.0.0+1]
+
+* Fixing flutter analyze issues in tests
+* Removing travis dependencies
+* Adding Codemagic status
+
 ## [2.0.0]
 
 * Null safety compatibility - what took so long?
