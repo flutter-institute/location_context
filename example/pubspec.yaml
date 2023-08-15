@@ -2,16 +2,16 @@ name: location_context_example
 description: Example for using the location_context package
 publish_to: none
 
-version: 2.0.0+1
+version: 3.0.0
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=3.0.0 <4.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^0.1.2
+  cupertino_icons: ^1.0.5
   location_context:
     path: ../
 

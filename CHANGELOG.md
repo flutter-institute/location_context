@@ -1,3 +1,8 @@
+## [3.0.0]
+
+* Updating to latest dependencies
+* Updating to dart SDK >=3.0.0
+
 ## [2.0.0+1]
 
 * Fixing flutter analyze issues in tests
